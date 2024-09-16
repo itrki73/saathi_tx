@@ -21,7 +21,7 @@ RUN npx prisma generate
 
 
 # Expose the port the app runs on
-EXPOSE 3004
+EXPOSE 3005
 
 # Command to start the application in development mode
 CMD ["npm", "run", "dev"]
