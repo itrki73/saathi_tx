@@ -1,0 +1,52 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DB_URL")
+}
+
+
+
+model Device {
+  uid               String      @id @default(uuid())
+  imei              String
+  longitude         String
+  lattitude         String
+  section_uid       String      
+  mobile_no         String
+  group_uid         String
+  isConnectedToRx   Boolean     @default(false)
+  sensor_status     Boolean     @default(true)
+  isActive          Boolean     @default(false)
+  battery           Int         @default(0)
+  is_online         Boolean     @default(false)
+  start_date        DateTime
+  isUpside          Boolean
+  end_date          DateTime
+  created_at        DateTime    @default(now())
+  updated_at        DateTime    @updatedAt
+  device_logs       DeviceLog[]
+  isTrainDetected Boolean @default(false)
+}
+
+
+
+model DeviceLog {
+  uid           String    @id @default(uuid())
+  device_uid    String
+  battery       Int       @default(0)
+  created_at    DateTime  @default(now())
+  device        Device    @relation(fields: [device_uid], references: [uid])
+  sensor_status Boolean   @default(false)
+  device_status Boolean   @default(false)
+  isTrainDetected Boolean @default(false)
+  isUpside  Boolean
+}
+
+model Group{
+  uid               String      @id @default(uuid())
+  name              String      @unique
+}

@@ -1,0 +1,21 @@
+version: '3.8'
+
+
+services:
+  nextjs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      -3005:3005
+
+    volumes:
+      - .:app
+      - app/node_modules
+    
+    environment:
+      - NODE_ENV=development
+      - WATCHPACK_POLLING=true
+      - NEXT_PUBLIC_WLMS=http://railkriti.co.in:3002
+      - NEXT_PUBLIC_USE_HTTPS=true
+      - DB_URL=mysql://root:inRKI@0510@49.50.119.39:3306/saathi_db_tx
