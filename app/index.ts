@@ -172,7 +172,7 @@ app.prepare().then(() => {
     });
   });
 
-  const port = process.env.PORT || 3004;
+  const port = process.env.PORT || 3005;
   server.listen(port, () => {
     console.log(`> Server ready on ${useHTTPS ? 'https' : 'http'}://localhost:${port}`);
   });
