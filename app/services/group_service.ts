@@ -6,6 +6,37 @@ interface Group {
 }
 
 export class GroupService {
+   async updateGroup(data: any) {
+     try {
+        const update_group = await prisma.group.update({
+            where: {
+                uid: data.uid
+            },
+            data: {
+                name:data.name
+            }
+        })
+
+        return update_group;
+     } catch (error) {
+       return null;
+        
+     }
+    }
+
+
+    async getAllGroups() {
+        try {
+            const groups = await prisma.group.findMany();
+            if (!groups) {
+                return [];
+            }
+
+            return groups
+        } catch (error) {
+            throw new Error("Method not implemented.");
+        }
+    }
 
     async AddGroup(data: Group) {
         const log = await prisma.group.create({
@@ -14,7 +45,7 @@ export class GroupService {
             }
         });
 
-        if(!log){
+        if (!log) {
             return null;
         }
         return log;
@@ -22,6 +53,7 @@ export class GroupService {
 
 
     async getGroupByName(group_name: string) {
+        console.log(group_name);
         try {
             const group = await prisma.group.findUnique({
                 where: {

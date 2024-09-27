@@ -1,27 +1,20 @@
-# Development Stage
-FROM node:latest AS development
+# Base image for Node.js
+FROM node:20-alpine AS base
 
-# Set working directory
+# Set the working directory inside the container
 WORKDIR /app
 
-# Install dependencies
+# Copy package.json and package-lock.json
 COPY package*.json ./
+
+# Install dependencies
 RUN npm install
-
-# Copy source files
+RUN npm install -g nodemon
+# Copy the rest of the application code
 COPY . .
-
-
-# Install TypeScript globally (if needed)
-RUN npm install -g typescript
-RUN npm install -g dotenv
 RUN npx prisma generate
-
-# Install nodemon for live reloading
-
-
-# Expose the port the app runs on
+# Expose the port your app runs on
 EXPOSE 3005
 
-# Command to start the application in development mode
+# Start the application
 CMD ["npm", "run", "dev"]

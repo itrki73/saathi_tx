@@ -1,0 +1,8 @@
+{
+    "watch": ["app", "services", "conf"], 
+    "ext": "ts,js,json",                
+    "ignore": ["node_modules"],            
+    "exec": "ts-node app/index.ts",         
+    "legacyWatch": true                    
+  }
+  

@@ -1,6 +1,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
 }
 
 datasource db {
@@ -12,6 +13,7 @@ datasource db {
 
 model Device {
   uid               String      @id @default(uuid())
+  name              String
   imei              String
   longitude         String
   lattitude         String
@@ -23,6 +25,7 @@ model Device {
   isActive          Boolean     @default(false)
   battery           Int         @default(0)
   is_online         Boolean     @default(false)
+  is_fixed          Boolean     @default(true)
   start_date        DateTime
   isUpside          Boolean
   end_date          DateTime
